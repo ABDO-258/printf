@@ -6,7 +6,7 @@ int print_str(char *str)
     if (str == NULL)
     {
         print_str("(null)");
-        return(4);
+        return(6);
         
     }
     while (str[len] != '\0')
