@@ -20,7 +20,12 @@ int _printf(const char *format, ...)
         if(*p == '%')
         {
             p++;
-            
+            if (*p == '%' && *(p+1) == '%')
+             {
+                    _putchar('%');   
+                    count++;
+                     p += 2;
+             }
 
             if (*p == 'c')
             {
@@ -48,17 +53,13 @@ int _printf(const char *format, ...)
             }
             else if (*p == '\0' || *p == ' ')
                     return(-1);
-             else if (*p == '%' && *(p+1) == '%')
-             {
-                    _putchar('%');   
-                    count++;
-                     p += 2;
-             }
+             
              else  
             {
                 
                 if (*p)
                 {
+                    _putchar('%');
                     _putchar(*p);   
                     count++;
                      p++;
