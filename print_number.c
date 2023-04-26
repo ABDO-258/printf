@@ -1,5 +1,5 @@
 #include "main.h"
-void print_number(int n)
+int print_number(int n)
 {
     
     if (n < 0)
@@ -17,6 +17,6 @@ void print_number(int n)
         _putchar(n + 48);
 
     }
-
+return(1);
 
 }
