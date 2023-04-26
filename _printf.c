@@ -21,20 +21,24 @@ int _printf(const char *format, ...)
         {
             p++;
             
+
             if (*p == 'c')
             {
                 _putchar(va_arg(args, int));
                 p++;
                 count++;
             }
-            else if (*p == 's' || *(p+1) == 's')
+            else if (*p == 's' )
             {
                 char *ptrs = va_arg(args, char *);
                 
                 count = count + print_str(ptrs);
-               /* for (ptrs = va_arg(args, char *); *ptrs != '\0'; ptrs++, count++)
-                _putchar(*ptrs);*/
-                p++;
+                if (*p == 's')
+                    p++;
+                else if (*(p+1) == 's')
+                    p += 2;
+                else
+                p += 3;
             }
             else if (*p == 'd' || *p == 'i' )
             {
@@ -42,6 +46,8 @@ int _printf(const char *format, ...)
                 print_number(n);
                 p++;
             }
+            else if (*p == '\0' || *p == ' ')
+                    return(-1);
              else if (*p == '%' && *(p+1) == '%')
              {
                     _putchar('%');   
