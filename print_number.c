@@ -8,19 +8,27 @@
 
 int print_number(int n)
 {
+	int count = 0;
+
+	if (n == INT_MIN)
+	{
+		count += _putchar('-');
+		count += _putchar('2');
+		n = 147483648;
+	}
 	if (n < 0)
 	{
-		_putchar('-');
+		count += _putchar('-');
 		n = n * (-1);
 	}
 	if (n >= 10)
 	{
-		print_number(n / 10);
-		print_number(n % 10);
+		count += print_number(n / 10);
+		count += print_number(n % 10);
 	}
 	else if (n < 10)
 	{
-		_putchar(n + 48);
+		count += _putchar(n + 48);
 	}
-	return (1);
+	return (count);
 }
