@@ -2,62 +2,50 @@
 #include <stdio.h>
 #include <limits.h>
 #include "main.h"
-
+/**
+*_printf - my printf for alx project
+*@format:argument to be printed
+*Return:number of char printed
+*/
 int _printf(const char *format, ...)
 {
-    int count = 0;
-    const char* p;
-    va_list args;
+	int count = 0;
+	va_list args;
 
-    if (format == NULL)
-        return(-1);
-
-   va_start (args, format);
-
-    for (p = format; *p != '\0'; ++p)
-    {        
-        if(*p == '%')
-        {
-            p++;
-            if (*p == '\0' || *p == ' ')
-                    return(-1);
-            else if (*p == '%')
-             {
-                    _putchar('%');   
-                    count++;
-            }   
-            else if (*p == 'c')
-            {
-                char c = va_arg(args, int);
-                _putchar(c);
-        
-                count++;
-            }
-            else if (*p == 's' )
-            {
-                char *ptrs = va_arg(args, char *);
-                
-                count = count + print_str(ptrs);
-                
-            }
-            else if (*p == 'd' || *p == 'i' )
-            {
-                int n = va_arg(args, int);
-                print_number(n);
-            }
-            else  
-            {
-                _putchar('%');
-                _putchar(*p);   
-                    count += 2;
-            }
-        }
-        else
-        {
-        _putchar(*p);
-        count++;
-        }
-    }
-    va_end(args);
-    return (count);
+	if (format == NULL)
+		return (-1);
+	va_start(args, format);
+	for (; *format != '\0'; format++)
+	{
+		if (*format == '%')
+		{
+			format++;
+			if (*format == '\0' || *format == ' ')
+				return (-1);
+			else if (*format == '%')
+				count += _putchar('%');
+			else if (*format == 'c')
+			{
+				count += _putchar(va_arg(args, int));
+			}
+			else if (*format == 's')
+			{
+				count += print_str(va_arg(args, char *));
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				count += print_number(va_arg(args, int));
+			}
+			else
+			{
+				_putchar('%');
+				_putchar(*format);
+				count += 2;
+			}
+		}
+		else
+			count += _putchar(*format);
+	}
+	va_end(args);
+	return (count);
 }
