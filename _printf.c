@@ -25,17 +25,13 @@ int _printf(const char *format, ...)
 			else if (*format == '%')
 				count += _putchar('%');
 			else if (*format == 'c')
-			{
 				count += _putchar(va_arg(args, int));
-			}
 			else if (*format == 's')
-			{
 				count += print_str(va_arg(args, char *));
-			}
 			else if (*format == 'd' || *format == 'i')
-			{
 				count += print_number(va_arg(args, int));
-			}
+			else if (*format == 'b')
+				count += print_binary(va_arg(args, unsigned int));
 			else
 			{
 				_putchar('%');
